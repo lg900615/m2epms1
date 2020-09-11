@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.m2e_user_allocation.entity.SysUser;
 import com.example.m2e_user_allocation.model.SysLoginModel;
 import com.example.m2e_user_allocation.service.ISysUserService;
+import com.redis.utils.RedisUtils;
 import com.util.JwtUtil;
 import com.util.PasswordUtil;
 import com.util.Result;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
 
 /**
  * @Author scott
@@ -31,8 +34,8 @@ public class LoginController {
 //	private ISysBaseAPI sysBaseAPI;
 //	@Autowired
 //	private ISysLogService logService;
-//	@Resource
-//    private RedisUtils redisUtil;
+	@Resource
+    private RedisUtils redisUtil;
 //	@Autowired
 //    private ISysDepartService sysDepartService;
 
@@ -40,6 +43,8 @@ public class LoginController {
 	@ApiOperation("登录接口")
 	public Result<JSONObject> login() throws Exception {
 		SysLoginModel sysLoginModel = new SysLoginModel();
+		sysLoginModel.setUsername("张三");
+		sysLoginModel.setPassword("123456");
 		Result<JSONObject> result = new Result<JSONObject>();
 		String username = sysLoginModel.getUsername();
 		String password = sysLoginModel.getPassword();
