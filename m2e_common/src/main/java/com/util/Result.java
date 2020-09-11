@@ -1,9 +1,10 @@
 package com.util;
 
 import java.io.Serializable;
+
+import com.enumInterface.CommonConstant;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.jeecg.common.constant.CommonConstant;
 import lombok.Data;
 
 /**

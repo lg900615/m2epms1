@@ -8,8 +8,9 @@
         <outputRelativeToContentRoot value="true" />
         <module name="m2e_user_allocation" />
         <module name="m2e_server" />
-        <module name="m2e_redis" />
+        <module name="m2e_ticket" />
         <module name="m2e_zookeeper" />
+        <module name="m2e_redis" />
         <module name="m2e_common" />
         <module name="untitled" />
       </profile>
@@ -22,6 +23,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="m2e_redis" options="-parameters" />
       <module name="m2e_server" options="-parameters" />
+      <module name="m2e_ticket" options="-parameters" />
       <module name="m2e_user_allocation" options="-parameters" />
       <module name="m2e_zookeeper" options="-parameters" />
     </option>

@@ -4,10 +4,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import com.example.m2e_user_allocation.Entity.SysLog;
+import com.example.m2e_user_allocation.entity.SysLog;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.springframework.stereotype.Repository;
 
 /**
  * <p>
@@ -17,6 +19,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @Author zhangweijian
  * @since 2018-12-26
  */
+@Mapper
 public interface SysLogMapper extends BaseMapper<SysLog> {
 
 	/**

@@ -1,5 +1,8 @@
 package com.example.m2e_user_allocation.service;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public interface ISysBaseAPI {
 
     /**

@@ -1,33 +1,16 @@
 package com.example.m2e_user_allocation.service.Impl;
 
-import java.lang.reflect.InvocationTargetException;
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.sql.DataSource;
 
-import com.example.m2e_user_allocation.Entity.LoginUser;
-import com.example.m2e_user_allocation.Entity.SysLog;
+import com.example.m2e_user_allocation.entity.SysLog;
 import com.example.m2e_user_allocation.mapper.SysLogMapper;
 import com.example.m2e_user_allocation.service.ISysBaseAPI;
 import com.util.IPUtils;
 import com.util.SpringContextUtils;
 import org.springframework.stereotype.Service;
-
-import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 import lombok.extern.slf4j.Slf4j;
 

@@ -1,4 +1,4 @@
-package com.example.m2e_user_allocation.Entity;
+package com.example.m2e_user_allocation.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

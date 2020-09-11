@@ -12,6 +12,7 @@
         <option value="$PROJECT_DIR$/m2e_redis/pom.xml" />
         <option value="$PROJECT_DIR$/m2e_zookeeper/pom.xml" />
         <option value="$PROJECT_DIR$/m2e_user_allocation/pom.xml" />
+        <option value="$PROJECT_DIR$/m2e_ticket/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

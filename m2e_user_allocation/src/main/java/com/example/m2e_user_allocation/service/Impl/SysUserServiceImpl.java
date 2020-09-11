@@ -2,14 +2,15 @@ package com.example.m2e_user_allocation.service.Impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.enumInterface.CommonConstant;
-import com.example.m2e_user_allocation.Entity.SysUser;
+import com.example.m2e_user_allocation.entity.SysUser;
 import com.example.m2e_user_allocation.mapper.SysUserMapper;
 import com.example.m2e_user_allocation.service.ISysBaseAPI;
 import com.example.m2e_user_allocation.service.ISysUserService;
 import com.util.Result;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -23,7 +24,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements ISysUserService {
 	
-	@Autowired
+	@Resource
 	private SysUserMapper userMapper;
 //	@Autowired
 //	private SysPermissionMapper sysPermissionMapper;
@@ -31,7 +32,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 //	private SysUserRoleMapper sysUserRoleMapper;
 //	@Autowired
 //	private SysUserDepartMapper sysUserDepartMapper;
-	@Autowired
+	@Resource
 	private ISysBaseAPI sysBaseAPI;
 //	@Autowired
 //	private SysDepartMapper sysDepartMapper;

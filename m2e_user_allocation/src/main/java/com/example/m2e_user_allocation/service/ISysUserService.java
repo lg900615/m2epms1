@@ -1,13 +1,9 @@
 package com.example.m2e_user_allocation.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.example.m2e_user_allocation.Entity.SysUser;
+import com.example.m2e_user_allocation.entity.SysUser;
 import com.util.Result;
-
-import java.util.List;
-import java.util.Set;
+import org.springframework.stereotype.Repository;
 
 /**
  * <p>
@@ -17,6 +13,7 @@ import java.util.Set;
  * @Author scott
  * @since 2018-12-20
  */
+@Repository
 public interface ISysUserService extends IService<SysUser> {
 	
 	public SysUser getUserByName(String username);

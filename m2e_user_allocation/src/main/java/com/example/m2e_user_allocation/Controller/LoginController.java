@@ -1,13 +1,11 @@
 package com.example.m2e_user_allocation.Controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.enumInterface.CommonConstant;
-import com.example.m2e_user_allocation.Entity.SysUser;
+import com.example.m2e_user_allocation.entity.SysUser;
 import com.example.m2e_user_allocation.model.SysLoginModel;
 import com.example.m2e_user_allocation.service.ISysUserService;
 import com.util.JwtUtil;
 import com.util.PasswordUtil;
-import com.util.RedisUtil;
 import com.util.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -33,14 +31,15 @@ public class LoginController {
 //	private ISysBaseAPI sysBaseAPI;
 //	@Autowired
 //	private ISysLogService logService;
-	@Autowired
-    private RedisUtil redisUtil;
+//	@Resource
+//    private RedisUtils redisUtil;
 //	@Autowired
 //    private ISysDepartService sysDepartService;
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/login")
 	@ApiOperation("登录接口")
-	public Result<JSONObject> login(@RequestBody SysLoginModel sysLoginModel) throws Exception {
+	public Result<JSONObject> login() throws Exception {
+		SysLoginModel sysLoginModel = new SysLoginModel();
 		Result<JSONObject> result = new Result<JSONObject>();
 		String username = sysLoginModel.getUsername();
 		String password = sysLoginModel.getPassword();
@@ -296,9 +295,9 @@ public class LoginController {
 		String username = sysUser.getUsername();
 		// 生成token
 		String token = JwtUtil.sign(username, syspassword);
-		redisUtil.set(CommonConstant.PREFIX_USER_TOKEN + token, token);
+//		redisUtil.set(CommonConstant.PREFIX_USER_TOKEN + token, token);
 		// 设置超时时间
-		redisUtil.expire(CommonConstant.PREFIX_USER_TOKEN + token, JwtUtil.EXPIRE_TIME / 1000);
+//		redisUtil.expire(CommonConstant.PREFIX_USER_TOKEN + token, JwtUtil.EXPIRE_TIME / 1000);
 
 		// 获取用户部门信息
 		JSONObject obj = new JSONObject();
