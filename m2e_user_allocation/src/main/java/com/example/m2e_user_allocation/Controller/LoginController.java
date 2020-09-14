@@ -28,7 +28,8 @@ import javax.annotation.Resource;
 @Api(tags="用户登录")
 @Slf4j
 public class LoginController {
-	@Autowired
+//	@Autowired
+	@Resource
 	private ISysUserService sysUserService;
 //	@Autowired
 //	private ISysBaseAPI sysBaseAPI;
