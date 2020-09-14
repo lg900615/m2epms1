@@ -4,17 +4,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.m2e_user_allocation.entity.SysUser;
 import com.example.m2e_user_allocation.model.SysLoginModel;
 import com.example.m2e_user_allocation.service.ISysUserService;
-import com.redis.utils.RedisUtils;
 import com.util.JwtUtil;
 import com.util.PasswordUtil;
+import com.util.RedisUtils;
 import com.util.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -28,7 +25,7 @@ import javax.annotation.Resource;
 @Api(tags="用户登录")
 @Slf4j
 public class LoginController {
-	@Autowired
+	@Resource
 	private ISysUserService sysUserService;
 //	@Autowired
 //	private ISysBaseAPI sysBaseAPI;
@@ -42,6 +39,7 @@ public class LoginController {
 	@RequestMapping(value = "/login")
 	@ApiOperation("登录接口")
 	public Result<JSONObject> login() throws Exception {
+		redisUtil.setString("11","zhangsan");
 		SysLoginModel sysLoginModel = new SysLoginModel();
 		sysLoginModel.setUsername("张三");
 		sysLoginModel.setPassword("123456");
