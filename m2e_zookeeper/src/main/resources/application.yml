@@ -1,14 +1,13 @@
 spring:
   application:
-    name: sofa-config-zk
-  profiles:
-    active: dev
+    name: zk-server
   cloud:
     zookeeper:
-      enabled: true  # true:开启zookeeper外部化配置, false:读取本地配置;
-      connect-string: sofa.cloud.alipay.net:2181
-      config:
-        root: /config/sofa   #指定zookeeper中属性的根目录
+      connect-string: localhost:2081
+      discovery:
+        register: true
         enabled: true
-        watcher:
-          enabled: true    #默认值是true, 监控配置变更后是否自动更新
+        instance-id: 1
+        root: /shenniu
+server:
+  port: 6061

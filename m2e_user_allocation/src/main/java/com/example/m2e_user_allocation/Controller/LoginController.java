@@ -1,8 +1,11 @@
 package com.example.m2e_user_allocation.Controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.enumInterface.CommonConstant;
+import com.example.m2e_user_allocation.config.DefContants;
 import com.example.m2e_user_allocation.entity.SysUser;
 import com.example.m2e_user_allocation.model.SysLoginModel;
+import com.example.m2e_user_allocation.service.ISysBaseAPI;
 import com.example.m2e_user_allocation.service.ISysUserService;
 import com.util.JwtUtil;
 import com.util.PasswordUtil;
@@ -11,10 +14,13 @@ import com.util.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @Author scott
@@ -27,8 +33,8 @@ import javax.annotation.Resource;
 public class LoginController {
 	@Resource
 	private ISysUserService sysUserService;
-//	@Autowired
-//	private ISysBaseAPI sysBaseAPI;
+	@Resource
+	private ISysBaseAPI sysBaseAPI;
 //	@Autowired
 //	private ISysLogService logService;
 	@Resource
@@ -36,13 +42,10 @@ public class LoginController {
 //	@Autowired
 //    private ISysDepartService sysDepartService;
 
-	@RequestMapping(value = "/login")
+	@PostMapping(value = "/login")
 	@ApiOperation("登录接口")
-	public Result<JSONObject> login() throws Exception {
+	public Result<JSONObject> login(@RequestBody SysLoginModel sysLoginModel) throws Exception {
 		redisUtil.setString("11","zhangsan");
-		SysLoginModel sysLoginModel = new SysLoginModel();
-		sysLoginModel.setUsername("张三");
-		sysLoginModel.setPassword("123456");
 		Result<JSONObject> result = new Result<JSONObject>();
 		String username = sysLoginModel.getUsername();
 		String password = sysLoginModel.getPassword();
@@ -68,40 +71,39 @@ public class LoginController {
 				
 		//用户登录信息
 		userInfo(sysUser, result);
-//		sysBaseAPI.addLog("用户名: " + username + ",登录成功！", CommonConstant.LOG_TYPE_1, null);
+		sysBaseAPI.addLog("用户名: " + username + ",登录成功！", CommonConstant.LOG_TYPE_1, null);
 		//将app端登录的token保存到数据库
-
 		return result;
 	}
-//
-//	/**
-//	 * 退出登录
-//	 * @param request
-//	 * @param response
-//	 * @return
-//	 */
-//	@RequestMapping(value = "/logout")
-//	public Result<Object> logout(HttpServletRequest request,HttpServletResponse response) {
-//		//用户退出逻辑
-//	    String token = request.getHeader(DefContants.X_ACCESS_TOKEN);
-//	    if(oConvertUtils.isEmpty(token)) {
-//	    	return Result.error("退出登录失败！");
-//	    }
-//	    String username = JwtUtil.getUsername(token);
-//	    SysUser sysUser = sysUserService.getUserByName(username);
-//	    if(sysUser!=null) {
-//	    	sysBaseAPI.addLog("用户名: "+sysUser.getRealname()+",退出成功！", CommonConstant.LOG_TYPE_1, null);
-//	    	log.info(" 用户名:  "+sysUser.getRealname()+",退出成功！ ");
-//	    	//清空用户Token缓存
-//	    	redisUtil.del(CommonConstant.PREFIX_USER_TOKEN + token);
-//	    	//清空用户权限缓存：权限Perms和角色集合
-//	    	redisUtil.del(CommonConstant.LOGIN_USER_CACHERULES_ROLE + username);
-//	    	redisUtil.del(CommonConstant.LOGIN_USER_CACHERULES_PERMISSION + username);
-//	    	return Result.ok("退出登录成功！");
-//	    }else {
-//	    	return Result.error("无效的token");
-//	    }
-//	}
+
+	/**
+	 * 退出登录
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/logout")
+	public Result<Object> logout(HttpServletRequest request, HttpServletResponse response) {
+		//用户退出逻辑
+	    String token = request.getHeader(DefContants.X_ACCESS_TOKEN);
+	    if(StringUtils.isEmpty(token)) {
+	    	return Result.error("退出登录失败！");
+	    }
+	    String username = JwtUtil.getUsername(token);
+	    SysUser sysUser = sysUserService.getUserByName(username);
+	    if(sysUser!=null) {
+	    	sysBaseAPI.addLog("用户名: "+sysUser.getRealname()+",退出成功！", CommonConstant.LOG_TYPE_1, null);
+	    	log.info(" 用户名:  "+sysUser.getRealname()+",退出成功！ ");
+	    	//清空用户Token缓存
+	    	redisUtil.del(CommonConstant.PREFIX_USER_TOKEN + token);
+	    	//清空用户权限缓存：权限Perms和角色集合
+	    	redisUtil.del(CommonConstant.LOGIN_USER_CACHERULES_ROLE + username);
+	    	redisUtil.del(CommonConstant.LOGIN_USER_CACHERULES_PERMISSION + username);
+	    	return Result.ok("退出登录成功！");
+	    }else {
+	    	return Result.error("无效的token");
+	    }
+	}
 //
 //	/**
 //	 * 获取访问量
