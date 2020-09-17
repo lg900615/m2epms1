@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="m2e_user_allocation" />
+        <module name="m2e-sso-server" />
         <module name="m2e_zuul" />
         <module name="m2e_server" />
         <module name="m2e_ticket" />

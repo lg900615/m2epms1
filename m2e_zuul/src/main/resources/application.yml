@@ -12,6 +12,7 @@ spring:
 zuul:
   routes:
     service-user: sys/**
+    m2e-sso-server: sso/**
 
   host:
     connect-timeout-millis: 3000
