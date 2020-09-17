@@ -45,3 +45,5 @@ mybatis-plus:
       id-type: UUID
       # 默认数据库表下划线命名
       table-underline: true
+
+

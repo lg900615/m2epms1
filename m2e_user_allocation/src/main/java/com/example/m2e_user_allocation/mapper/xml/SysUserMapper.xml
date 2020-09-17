@@ -2,137 +2,137 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.m2e_user_allocation.mapper.SysUserMapper">
 
-	<!-- 根据用户名查询 -->
-	<select id="getUserByName" resultType="com.example.m2e_user_allocation.entity.SysUser">
+    <!-- 根据用户名查询 -->
+    <select id="getUserByName" resultType="com.example.m2e_user_allocation.entity.SysUser">
 		select * from  sys_user  where username = #{username} and del_flag = '0'
 	</select>
-	
-	<!-- 根据用户名集合查询用户真实姓名,返回真实姓名集合-->
-	<select id="getRealNamesByNames" resultType="java.lang.String">
-		select realname from  sys_user  where  del_flag = '0' and id IN
-			<foreach collection="usernamelist" item="id" index="index" open="(" close=")" separator=",">
-			  #{id}
-			</foreach>
-	</select>
-	<!-- 根据用户名查询用户真实姓名-->
-	<select id="getRealNameByName" resultType="java.lang.String">
+
+    <!-- 根据用户名集合查询用户真实姓名,返回真实姓名集合-->
+    <select id="getRealNamesByNames" resultType="java.lang.String">
+        select realname from  sys_user  where  del_flag = '0' and id IN
+        <foreach collection="usernamelist" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+    <!-- 根据用户名查询用户真实姓名-->
+    <select id="getRealNameByName" resultType="java.lang.String">
 		select realname from  sys_user  where username = #{username} and del_flag = '0'
 	</select>
-	<!-- 根据部门Id查询 -->
-	<select id="getUserByDepId" resultType="com.example.m2e_user_allocation.entity.SysUser">
-		select * from sys_user where del_flag = '0' and id in (select user_id from sys_user_depart where dep_id=#{departId})
-		<if test="username!=null and username!=''">
-			and username = #{username}
-		</if>
-	</select>
+    <!-- 根据部门Id查询 -->
+    <select id="getUserByDepId" resultType="com.example.m2e_user_allocation.entity.SysUser">
+        select * from sys_user where del_flag = '0' and id in (select user_id from sys_user_depart where dep_id=#{departId})
+        <if test="username!=null and username!=''">
+            and username = #{username}
+        </if>
+    </select>
 
-	<!-- 根据角色Id查询 -->
-	<select id="getUserByRoleId" resultType="com.example.m2e_user_allocation.entity.SysUser">
-		select * from sys_user where del_flag = '0' and id in (select user_id from sys_user_role where role_id=#{roleId})
-		<if test="username!=null and username!=''">
-			and username = #{username}
-		</if>
-	</select>
-	
-	<!--  修改用户部门code -->
-	<update id="updateUserDepart">
+    <!-- 根据角色Id查询 -->
+    <select id="getUserByRoleId" resultType="com.example.m2e_user_allocation.entity.SysUser">
+        select * from sys_user where del_flag = '0' and id in (select user_id from sys_user_role where role_id=#{roleId})
+        <if test="username!=null and username!=''">
+            and username = #{username}
+        </if>
+    </select>
+
+    <!--  修改用户部门code -->
+    <update id="updateUserDepart">
 		UPDATE sys_user SET org_code = #{orgCode} where username = #{username}
 	</update>
 
-	<!-- 根据手机号查询 -->
-	<select id="getUserByPhone"  resultType="com.example.m2e_user_allocation.entity.SysUser">
+    <!-- 根据手机号查询 -->
+    <select id="getUserByPhone"  resultType="com.example.m2e_user_allocation.entity.SysUser">
 		select * from  sys_user  where phone = #{phone} and del_flag = '0'
 	</select>
-	
-	<!-- 根据邮箱查询用户信息 -->
-	<select id="getUserByEmail" resultType="com.example.m2e_user_allocation.entity.SysUser">
+
+    <!-- 根据邮箱查询用户信息 -->
+    <select id="getUserByEmail" resultType="com.example.m2e_user_allocation.entity.SysUser">
 	select * from  sys_user  where email = #{email} and del_flag = '0'
 	</select>
-	
-	<!-- 根据用户名查询 -->
-	<select id="queryUserByUserIdsAndName" resultType="com.example.m2e_user_allocation.entity.SysUser">
-		select * from  sys_user  where del_flag = '0'
-		<!-- select * from sys_user where del_flag = '0' and id in (select user_id from sys_user_depart where dep_id=#{subOrgId}) -->
-		<if test="name!=null and name!=''">
-			and realname like concat('%', #{name}, '%')
-		</if>
-		<if test="ids != null and ids.size > 0">
-			and id in
-			<foreach collection="ids" item="item" index="index" open="(" close=")" separator=",">
-			  #{item}
-			</foreach>
-		</if>
-		<if test="pageNo!=null and pageNo!='' and pageSize!=null and pageSize!=''">
-			order by id LIMIT #{pageNo}, #{pageSize} ;
-		</if>
-	</select>
-	
-	<!-- 根据电站和用户名查询 -->
-	<select id="queryUserByOrgUserIdsAndName" resultType="com.example.m2e_user_allocation.entity.SysUser">
-		select * from sys_user where del_flag = '0' and id in (select user_id from sys_user_depart where dep_id=#{subOrgId})
-		<if test="name!=null and name!=''">
-			and realname like concat('%', #{name}, '%')
-		</if>
-		<if test="ids!=null and ids!=''">
-			and id in #{ids}
-		</if>
-		<if test="pageNo!=null and pageNo!='' and pageSize!=null and pageSize!=''">
-			order by id LIMIT #{pageNo}, #{pageSize} ;
-		</if>
-	</select>
-	
-	<!-- 根据用户id和用户名查询 -->
-	<select id="queryUserByIdsAndName" resultType="com.example.m2e_user_allocation.entity.SysUser">
-		select * from sys_user where del_flag = '0'
-		<if test="name != null and name != ''">
-			and realname like concat('%', #{name}, '%')
-		</if>
-		<if test="ids != null and ids.size > 0">
-			and id in
-			<foreach collection="ids" item="item" index="index" open="(" close=")" separator=",">
-			  #{item}
-			</foreach>
-		</if>
-		<if test="pageNo != null and pageNo != '' and pageSize != null and pageSize != ''">
-			order by id LIMIT #{pageNo}, #{pageSize} ;
-		</if>
-	</select>
-	
-	<!-- 根据用户ID集合查询   -->
-	<select id="queryUserByUserIds" resultType="com.example.m2e_user_allocation.entity.SysUser">
-		select * from  sys_user  where del_flag = '0'
-		<if test="usernamelist!=null and usernamelist.size > 0">
-			and id in 
-			<foreach collection="usernamelist" item="item" index="index" open="(" close=")" separator=",">
-			  #{item}
-			</foreach>
-		</if>
-	</select>
-	<!-- 根据用户id查询用户真实姓名-->
-	<select id="getRealNameById" resultType="java.lang.String">
+
+    <!-- 根据用户名查询 -->
+    <select id="queryUserByUserIdsAndName" resultType="com.example.m2e_user_allocation.entity.SysUser">
+        select * from  sys_user  where del_flag = '0'
+        <!-- select * from sys_user where del_flag = '0' and id in (select user_id from sys_user_depart where dep_id=#{subOrgId}) -->
+        <if test="name!=null and name!=''">
+            and realname like concat('%', #{name}, '%')
+        </if>
+        <if test="ids != null and ids.size > 0">
+            and id in
+            <foreach collection="ids" item="item" index="index" open="(" close=")" separator=",">
+                #{item}
+            </foreach>
+        </if>
+        <if test="pageNo!=null and pageNo!='' and pageSize!=null and pageSize!=''">
+            order by id LIMIT #{pageNo}, #{pageSize} ;
+        </if>
+    </select>
+
+    <!-- 根据电站和用户名查询 -->
+    <select id="queryUserByOrgUserIdsAndName" resultType="com.example.m2e_user_allocation.entity.SysUser">
+        select * from sys_user where del_flag = '0' and id in (select user_id from sys_user_depart where dep_id=#{subOrgId})
+        <if test="name!=null and name!=''">
+            and realname like concat('%', #{name}, '%')
+        </if>
+        <if test="ids!=null and ids!=''">
+            and id in #{ids}
+        </if>
+        <if test="pageNo!=null and pageNo!='' and pageSize!=null and pageSize!=''">
+            order by id LIMIT #{pageNo}, #{pageSize} ;
+        </if>
+    </select>
+
+    <!-- 根据用户id和用户名查询 -->
+    <select id="queryUserByIdsAndName" resultType="com.example.m2e_user_allocation.entity.SysUser">
+        select * from sys_user where del_flag = '0'
+        <if test="name != null and name != ''">
+            and realname like concat('%', #{name}, '%')
+        </if>
+        <if test="ids != null and ids.size > 0">
+            and id in
+            <foreach collection="ids" item="item" index="index" open="(" close=")" separator=",">
+                #{item}
+            </foreach>
+        </if>
+        <if test="pageNo != null and pageNo != '' and pageSize != null and pageSize != ''">
+            order by id LIMIT #{pageNo}, #{pageSize} ;
+        </if>
+    </select>
+
+    <!-- 根据用户ID集合查询   -->
+    <select id="queryUserByUserIds" resultType="com.example.m2e_user_allocation.entity.SysUser">
+        select * from  sys_user  where del_flag = '0'
+        <if test="usernamelist!=null and usernamelist.size > 0">
+            and id in
+            <foreach collection="usernamelist" item="item" index="index" open="(" close=")" separator=",">
+                #{item}
+            </foreach>
+        </if>
+    </select>
+    <!-- 根据用户id查询用户真实姓名-->
+    <select id="getRealNameById" resultType="java.lang.String">
 		select realname from  sys_user  where id = #{userId} and del_flag = '0'
 	</select>
-	<!-- 根据用户id和用户名查询 -->
-	<select id="queryUserByIdsAndNames" resultType="com.example.m2e_user_allocation.entity.SysUser">
-		select * from sys_user where del_flag = '0'
-		<if test="listUserIds != null and listUserIds.size > 0">
-			and id in
-			<foreach collection="listUserIds" item="item" index="index" open="(" close=")" separator=",">
-			  #{item}
-			</foreach>
-		</if>
-	</select>
-	
-	<!-- 根据部门Id或名称查询 -->
-	<select id="getUserByOrgDepIdOrname" resultType="com.example.m2e_user_allocation.entity.SysUser">
-		select * from sys_user where del_flag = '0' and id in (select user_id from sys_user_depart where dep_id in 
-		<foreach collection="departIds" item="item" index="index" open="(" close=")" separator=",">
-			#{item}
-		</foreach>
-		)
-		
-		<if test="name!=null and name!=''">
-			and realname like concat('%', #{name}, '%')
-		</if>
-	</select>
+    <!-- 根据用户id和用户名查询 -->
+    <select id="queryUserByIdsAndNames" resultType="com.example.m2e_user_allocation.entity.SysUser">
+        select * from sys_user where del_flag = '0'
+        <if test="listUserIds != null and listUserIds.size > 0">
+            and id in
+            <foreach collection="listUserIds" item="item" index="index" open="(" close=")" separator=",">
+                #{item}
+            </foreach>
+        </if>
+    </select>
+
+    <!-- 根据部门Id或名称查询 -->
+    <select id="getUserByOrgDepIdOrname" resultType="com.example.m2e_user_allocation.entity.SysUser">
+        select * from sys_user where del_flag = '0' and id in (select user_id from sys_user_depart where dep_id in
+        <foreach collection="departIds" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+        )
+
+        <if test="name!=null and name!=''">
+            and realname like concat('%', #{name}, '%')
+        </if>
+    </select>
 </mapper>

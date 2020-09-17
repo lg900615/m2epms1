@@ -5,11 +5,13 @@ import java.util.Date;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import com.example.m2e_user_allocation.entity.LoginUser;
 import com.example.m2e_user_allocation.entity.SysLog;
 import com.example.m2e_user_allocation.mapper.SysLogMapper;
 import com.example.m2e_user_allocation.service.ISysBaseAPI;
 import com.util.IPUtils;
 import com.util.SpringContextUtils;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
@@ -73,12 +75,11 @@ public class SysBaseApiImpl implements ISysBaseAPI {
 		}
 
 		//获取登录用户信息
-//		LoginUser sysUser = (LoginUser)SecurityUtils.getSubject().getPrincipal();
-//		if(sysUser!=null){
-//			sysLog.setUserid(sysUser.getUsername());
-//			sysLog.setUsername(sysUser.getRealname());
-//
-//		}
+		LoginUser sysUser = (LoginUser) SecurityUtils.getSubject().getPrincipal();
+		if(sysUser!=null){
+			sysLog.setUserid(sysUser.getUsername());
+			sysLog.setUsername(sysUser.getRealname());
+		}
 		sysLog.setCreateTime(new Date());
 		//保存系统日志
 		sysLogMapper.insert(sysLog);
