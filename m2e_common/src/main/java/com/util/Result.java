@@ -2,7 +2,7 @@ package com.util;
 
 import java.io.Serializable;
 
-import com.enumInterface.CommonConstant;
+import enumInterface.CommonConstant;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

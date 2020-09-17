@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="apache-tomcat-8.0">
+    <CLASSES>
+      <root url="file://D:/JAVA/Tomcat/apache-tomcat-8.0.30" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://D:/JAVA/Tomcat/apache-tomcat-8.0.30/work/Catalina/localhost/m2epms_hz" />
+    </SOURCES>
+  </library>
+</component>

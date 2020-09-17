@@ -11,19 +11,20 @@ import com.util.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 /**
  * @Author scott
  * @since 2018-12-17
  */
-@RestController
+
 @RequestMapping("/sys")
 @Api(tags="用户登录")
 @Slf4j
+@RestController
 public class LoginController {
 	@Resource
 	private ISysUserService sysUserService;
@@ -36,13 +37,13 @@ public class LoginController {
 //	@Autowired
 //    private ISysDepartService sysDepartService;
 
-	@RequestMapping(value = "/login")
+	@RequestMapping("/login")
 	@ApiOperation("登录接口")
-	public Result<JSONObject> login() throws Exception {
+	public Result<JSONObject> login(@RequestBody SysLoginModel sysLoginModel) throws Exception {
 		redisUtil.setString("11","zhangsan");
-		SysLoginModel sysLoginModel = new SysLoginModel();
-		sysLoginModel.setUsername("张三");
-		sysLoginModel.setPassword("123456");
+//		SysLoginModel sysLoginModel = new SysLoginModel();
+//		sysLoginModel.setUsername("张三");
+//		sysLoginModel.setPassword("123456");
 		Result<JSONObject> result = new Result<JSONObject>();
 		String username = sysLoginModel.getUsername();
 		String password = sysLoginModel.getPassword();

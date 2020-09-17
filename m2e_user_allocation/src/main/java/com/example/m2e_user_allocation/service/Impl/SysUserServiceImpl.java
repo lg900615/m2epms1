@@ -1,12 +1,12 @@
 package com.example.m2e_user_allocation.service.Impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.enumInterface.CommonConstant;
 import com.example.m2e_user_allocation.entity.SysUser;
 import com.example.m2e_user_allocation.mapper.SysUserMapper;
 import com.example.m2e_user_allocation.service.ISysBaseAPI;
 import com.example.m2e_user_allocation.service.ISysUserService;
 import com.util.Result;
+import enumInterface.CommonConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

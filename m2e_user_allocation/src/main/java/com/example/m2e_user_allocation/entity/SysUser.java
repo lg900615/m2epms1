@@ -31,7 +31,7 @@ public class SysUser implements Serializable {
     /**
      * id
      */
-    @TableId(type = IdType.UUID)
+    @TableId(value = "id",type = IdType.UUID)
     private String id;
 
     /**
