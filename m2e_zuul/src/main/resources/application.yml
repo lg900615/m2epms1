@@ -1,0 +1,31 @@
+server:
+  port: 8081
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    instance:
+      prefer-ip-address: true
+spring:
+  application:
+    name: m2e_zuul
+zuul:
+  routes:
+    service-user: sys/**
+
+  host:
+    connect-timeout-millis: 3000
+    socket-timeout-millis: 3000
+ribbon:
+  ReadTimeout: 3000
+  ConnectTimeout: 3000
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeout-in-milliseconds: 3000
+filter:
+  allowPaths:
+    - /sys/login
