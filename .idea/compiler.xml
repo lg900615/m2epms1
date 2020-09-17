@@ -2,22 +2,22 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
-      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="m2e_user_allocation" />
-        <module name="m2e_zuul" />
         <module name="m2e_server" />
         <module name="m2e_ticket" />
-        <module name="m2e_zookeeper" />
         <module name="m2e_redis" />
         <module name="m2e_common" />
         <module name="untitled" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="8" />
+    <bytecodeTargetLevel>
+      <module name="m2e_zookeeper" target="1.8" />
+      <module name="untitled" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
@@ -26,7 +26,6 @@
       <module name="m2e_ticket" options="-parameters" />
       <module name="m2e_user_allocation" options="-parameters" />
       <module name="m2e_zookeeper" options="-parameters" />
-      <module name="m2e_zuul" options="-parameters" />
     </option>
   </component>
 </project>

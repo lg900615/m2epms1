@@ -28,6 +28,12 @@ spring:
       shutdown-timeout: 100ms
     password: ''
     port: 6379
+  #rabbitmq 配置
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
   #####################################################################################################
 feign:
   hystrix:
