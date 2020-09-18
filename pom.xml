@@ -13,16 +13,15 @@
         <module>m2e_redis</module>
         <module>m2e_redis</module>
         <module>m2e_redis</module>
-        <module>m2e-sso-server</module>
     </modules>
 
-    <dependencies>
-        <!-- feign -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
-    </dependencies>
+<!--    <dependencies>-->
+<!--        &lt;!&ndash; feign &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-openfeign</artifactId>-->
+<!--        </dependency>-->
+<!--    </dependencies>-->
 
 
 </project>

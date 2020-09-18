@@ -17,18 +17,14 @@
         <module name="untitled" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="m2e_zookeeper" target="1.8" />
-      <module name="untitled" target="1.5" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="m2e-sso-server" options="-parameters" />
       <module name="m2e_redis" options="" />
       <module name="m2e_server" options="-parameters" />
       <module name="m2e_ticket" options="-parameters" />
       <module name="m2e_user_allocation" options="-parameters" />
-      <module name="m2e_zookeeper" options="-parameters" />
       <module name="m2e_zuul" options="-parameters" />
     </option>
   </component>

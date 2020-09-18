@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class AccessFilterextends extends ZuulFilter {
+public class AccessFilter extends ZuulFilter {
 
     @Autowired
     private SsoFeign ssoFeign;
@@ -61,7 +61,7 @@ public class AccessFilterextends extends ZuulFilter {
             }
         }
         //过滤规则：cookie有令牌且存在于Redis，或者访问的是登录页面、登录请求则放行
-        if (url.contains("sso-server/sso/loginPage") || url.contains("sso-server/sso/login") || (!StringUtils.isEmpty(accessToken) && ssoFeign.hasKey(accessToken))) {
+        if (url.contains("sso/sso/loginPage") || url.contains("sso/sso/login") || (!StringUtils.isEmpty(accessToken) && ssoFeign.hasKey(accessToken))) {
             ctx.setSendZuulResponse(true);
             ctx.setResponseStatusCode(200);
             return null;
@@ -69,11 +69,11 @@ public class AccessFilterextends extends ZuulFilter {
             ctx.setSendZuulResponse(false);
             ctx.setResponseStatusCode(401);
             //重定向到登录页面
-            try {
-                response.sendRedirect("http://localhost:10010/sso-server/sso/loginPage?url=" + url);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                response.sendRedirect("http://localhost:10010/sso-server/sso/loginPage?url=" + url);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
             return null;
         }
     }

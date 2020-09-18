@@ -26,7 +26,8 @@ public class loginUserFilter extends ZuulFilter {
     @Override
     public boolean shouldFilter() {//过滤器是否使用
         RequestContext currentContext = RequestContext.getCurrentContext();
-        return currentContext.sendZuulResponse();
+//        return currentContext.sendZuulResponse();
+        return false;
     }
 
     @Override
@@ -37,7 +38,7 @@ public class loginUserFilter extends ZuulFilter {
         if (token == null||"".equals(token)) {
             System.out.println("————————身份认证失败——————————IP地址:  "+getIpAddr(request));
             System.out.println("token为空!");
-            currentContext.setSendZuulResponse(false);
+            currentContext.setSendZuulResponse(true);
             currentContext.setResponseStatusCode(401);
             currentContext.setResponseBody("token非法无效!");
 //            logger.info("————————身份认证失败——————————IP地址:  "+ IPUtils.getIpAddr(request));
